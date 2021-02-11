@@ -9,4 +9,5 @@
 #' first_function(2,3)
 first_function <- function(x, y) {
   z = x + y
+  return(z)
 }
