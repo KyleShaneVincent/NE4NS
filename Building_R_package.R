@@ -10,6 +10,7 @@
 library(devtools)
 library(roxygen2)
 library(testthat)
+library(knitr)
 
 devtools::session_info()
 
@@ -21,6 +22,11 @@ library(tidyverse)
 library(fs)
 
 
+setwd("C:/Users/kyles/Desktop/NE4NS")
+document()
+
+#Generate the manual
+devtools::build_manual(pkg=".", "C:/Users/kyles/Desktop/NE4NS")
 
 
 ##Create the package
@@ -131,6 +137,21 @@ build_readme()
 check()
 
 install()
+
+
+
+
+
+
+
+#Save the example data sets in the data file
+nodes = read.table("nodes.txt", header=TRUE)
+usethis::use_data(nodes)
+
+edges = read.table("edges.txt", header=TRUE)
+usethis::use_data(edges)
+
+
 
 
 
