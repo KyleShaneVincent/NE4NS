@@ -8,4 +8,4 @@
 #define NETWORKSAMPLING_API __declspec(dllimport)
 #endif
 
-extern NETWORKSAMPLING_API int scratch20();
+extern __declspec(dllexport) int __cdecl scratch20();
