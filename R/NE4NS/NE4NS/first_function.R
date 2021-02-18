@@ -15,4 +15,4 @@ first_function <- function(x, y) {
   return(z)
 }
 
-.C("scratch20")$result
+.C("scratch20")

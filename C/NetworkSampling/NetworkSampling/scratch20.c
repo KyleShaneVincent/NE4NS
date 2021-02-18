@@ -34,8 +34,19 @@
 #include "scratch20.h"
 
 long long int randomcalls = 0;  /* used in random number generation (mts) */
-
-int scratch20()
+/*
+tsteps default 10000
+paad0 default 0.0167
+naad0 default 1
+paadtrace default 0.5
+aadreseeddesign default 1 
+paadrandom default 0.01
+naadtarget default 400
+coupons default 0
+*/
+int scratch20(int *tsteps_value, double *paad0_value, int *naad0_value, double *paadtrace_value,
+			  int *aadreseeddesign_value, int *paadrandom_value, int *naadtarget_value, int *coupons_value,
+			  char *outputfilepath, char *nodeinputfilepath, char *nodefiinputfilepath, char *edgeinputfilepath)
 {
   extern NODE first;
   /* int dataid, databug, datadegree, dataconcurrent; */
@@ -48,16 +59,25 @@ int scratch20()
   time0 = time(NULL);
   clock0 = clock();
 
-  int tsteps = 10000;  /* number of iterations of sampling process */
+  int tsteps = *tsteps_value;  /* number of iterations of sampling process */
+  
+  /* select about paad0 * n initial units for the fast sampling process */
+  double paad0 = *paad0_value; //0.0167;
+  int naad0 = *naad0_value; //1;
+  double paadtrace = *paadtrace_value; //0.5;
+  int aadreseeddesign = *aadreseeddesign_value;// = 1;
+  double paadrandom = *paadrandom_value; // 0.01;
+  int naadtarget = *naadtarget_value;// 400;
+  int coupons = *coupons_value;// 0;
 
   /* write output to a file, outputfile = 1, or terminal, outputfile = 0. */
   int outputfile = 1;
   FILE *out_stream=NULL;
   if (outputfile == 1) /* change standard output to a file */
     {
-      if((out_stream=freopen("c:\\data\\output.txt", "w" ,stdout))==NULL)
+      if((out_stream=freopen(*outputfilepath /*"c:\\data\\output.txt"*/, "w" ,stdout))==NULL)
 	{
-	  printf("Cannot open file.\n");
+	  printf("Cannot open file: %s\n", outputfilepath);
 	  exit(1);
 	}
     }
@@ -79,9 +99,9 @@ int scratch20()
 
   /**** Read node IDs and values from file ****/
 
-  layoutp = fopen("c:\\data\\nodes.txt", "r");
+  layoutp = fopen(*nodeinputfilepath /*"c:\\data\\nodes.txt"*/, "r");
   if (layoutp == NULL) {
-    fprintf(stderr, "Can't open input file nodes.txt !\n");
+    fprintf(stderr, "Can't open file %s\n", nodeinputfilepath);
     exit(1);
   }
 
@@ -170,11 +190,11 @@ int scratch20()
   int dataid1, dataid2;
       FILE *linksp;
 
-      linksp = fopen("c:\\data\\edges.txt", "r");
+      linksp = fopen(*edgeinputfilepath /*"c:\\data\\edges.txt"*/, "r");
 
 
       if (linksp == NULL) {
-	fprintf(stderr, "Can't open input file edges.txt !\n");
+	fprintf(stderr, "Can't open file %s\n", edgeinputfilepath);
 	exit(1);
       }
 
@@ -333,15 +353,6 @@ printf("Edge data %d columns with names:\n", ncolumns);
       mts3 = createmtstate();
       init_genrand(mts3, sseed3);/* initialize random number stream mts3
 				    for idealized designs  */
-
-      /* select about paad0 * n initial units for the fast sampling process */
-      double paad0 = 0.0167;
-      int naad0 = 1;
-      double paadtrace = 0.5;
-      int aadreseeddesign = 1;
-      double paadrandom = 0.01;
-      int naadtarget = 400;
-      int coupons = 0;
 
       	  /* bernoulli initial sample */
       count = 0;
@@ -740,14 +751,14 @@ for (t = 1; t <= tsteps; t++)
  /* FILe *edgesfi_stream=NULL; */
 
  /* give names to the files to write to */
- char nodesfi_filename[] = "c:\\data\\nodesfi.txt";
+ //char nodesfi_filename[] = "c:\\data\\nodesfi.txt";
  /* char edges_filename[] = "edgesfij.txt"; */
 
  /* open the files to write to */
- nodesfi_stream = fopen(nodesfi_filename, "w");
+ nodesfi_stream = fopen(*nodefiinputfilepath, "w");
  if (nodesfi_stream == NULL)
    {
-     printf("can't open nodesfi file\n");
+     printf("can't file %s\n", nodefiinputfilepath);
      exit(1);
    }
  /* edges_stream = fopen(edgesfij_filename, "w"); */
