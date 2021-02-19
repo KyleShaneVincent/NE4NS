@@ -45,8 +45,8 @@ naadtarget default 400
 coupons default 0
 */
 int scratch20(int *tsteps_value, double *paad0_value, int *naad0_value, double *paadtrace_value,
-			  int *aadreseeddesign_value, int *paadrandom_value, int *naadtarget_value, int *coupons_value,
-			  char *outputfilepath, char *nodeinputfilepath, char *nodefiinputfilepath, char *edgeinputfilepath)
+			  int *aadreseeddesign_value, double *paadrandom_value, int *naadtarget_value, int *coupons_value,
+			  char **outputfilepath, char **nodeinputfilepath, char **nodefiinputfilepath, char **edgeinputfilepath)
 {
   extern NODE first;
   /* int dataid, databug, datadegree, dataconcurrent; */
@@ -72,12 +72,13 @@ int scratch20(int *tsteps_value, double *paad0_value, int *naad0_value, double *
 
   /* write output to a file, outputfile = 1, or terminal, outputfile = 0. */
   int outputfile = 1;
+
   FILE *out_stream=NULL;
   if (outputfile == 1) /* change standard output to a file */
     {
       if((out_stream=freopen(*outputfilepath /*"c:\\data\\output.txt"*/, "w" ,stdout))==NULL)
 	{
-	  printf("Cannot open file: %s\n", outputfilepath);
+	  printf("Cannot open file: %s\n", *outputfilepath);
 	  exit(1);
 	}
     }
@@ -101,7 +102,7 @@ int scratch20(int *tsteps_value, double *paad0_value, int *naad0_value, double *
 
   layoutp = fopen(*nodeinputfilepath /*"c:\\data\\nodes.txt"*/, "r");
   if (layoutp == NULL) {
-    fprintf(stderr, "Can't open file %s\n", nodeinputfilepath);
+    fprintf(stderr, "Can't open file %s\n", *nodeinputfilepath);
     exit(1);
   }
 
@@ -194,10 +195,9 @@ int scratch20(int *tsteps_value, double *paad0_value, int *naad0_value, double *
 
 
       if (linksp == NULL) {
-	fprintf(stderr, "Can't open file %s\n", edgeinputfilepath);
+	fprintf(stderr, "Can't open file %s\n", *edgeinputfilepath);
 	exit(1);
       }
-
 
    /* char linkfirstline[2048]; */
 
@@ -758,7 +758,7 @@ for (t = 1; t <= tsteps; t++)
  nodesfi_stream = fopen(*nodefiinputfilepath, "w");
  if (nodesfi_stream == NULL)
    {
-     printf("can't file %s\n", nodefiinputfilepath);
+     printf("can't file %s\n", *nodefiinputfilepath);
      exit(1);
    }
  /* edges_stream = fopen(edgesfij_filename, "w"); */
@@ -970,7 +970,6 @@ for (t = 1; t <= tsteps; t++)
 	}
       printf("**********************************************\n");
 
-
 printf("\n");
 
       if (linkestimates) /* do or don't estimate link variables */
@@ -1002,7 +1001,6 @@ printf("\n");
 
 
       /* calculate computing run time */
-
   time1 = time(NULL);
   clock1 = clock();
   printf("Wall time %ld seconds \n", (long) (time1-time0));
