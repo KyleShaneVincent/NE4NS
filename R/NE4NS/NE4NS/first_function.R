@@ -1,18 +1,10 @@
-#' Sums two values
-#'
-#' @param x real
-#' @param y real
-#'
-#' @return real
-#' @export
-#' @examples
-#' first_function(2,3)
+
 
 dyn.load("C:\\Users\\SeraphimSpawn\\source\\repos\\NE4NS\\NE4NS\\C\\NetworkSampling\\x64\\Debug\\NetworkSampling.dll")
-#dyn.load("C:\\Users\\SeraphimSpawn\\source\\repos\\NE4NS\\NE4NS\\C\\NetworkSampling\\Debug\\NetworkSampling.dll")
-first_function <- function(x, y) {
-  z = x + y
-  return(z)
-}
 
-.C("scratch20")
+
+
+.C("scratch20", tstep = as.integer(1000), paad0 = as.double(0.0167), naad0 = as.integer(1), paadtrace = as.double(0.5),
+   aadreseeddesign = as.integer(1), paadrandom = as.double(0.01), naadtarget = as.integer(400), coupons = as.integer(0),
+   outputfilepath = as.character("c:\\data\\output.txt"), nodeinputfilepath = as.character("c:\\data\\nodes.txt"),
+   nodefiinputfilepath = as.character("c:\\data\\edges.txt"), edgeinputfilepath = as.character("c:\\data\\nodesfi.txt"))
