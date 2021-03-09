@@ -24,7 +24,7 @@
     <ClInclude Include="scratch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="scratch20.h">
+    <ClInclude Include="NetworkSampleEstimate.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -41,7 +41,7 @@
     <ClCompile Include="libscratch.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="scratch20.c">
+    <ClCompile Include="Network_Sample_Estimates.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
