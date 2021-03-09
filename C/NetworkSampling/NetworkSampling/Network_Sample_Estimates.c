@@ -29,11 +29,44 @@
 #include <string.h>
 #include <math.h>
 //#include <tgmath.h>
+#include <Windows.h>	
 #include "scratch.h"  /* header files to go with scratch */
 #include "stdafx.h"
-#include "scratch20.h"
+#include "NetworkSampleEstimate.h"
 
+ /* write output to a file, outputfile = 1, or terminal, outputfile = 0. */
+int outputfile = 1;
 long long int randomcalls = 0;  /* used in random number generation (mts) */
+const char *buffer;
+long length;
+
+int NetworkSampleEstimatesConsoleOutput(int *tsteps_value, double *paad0_value, int *naad0_value, double *paadtrace_value,
+	int *aadreseeddesign_value, double *paadrandom_value, int *naadtarget_value, int *coupons_value,
+	char **nodeinputfilepath, char **nodefiinputfilepath, char **edgeinputfilepath, char **outputbuffer)
+{
+	char *tempOutput[] = { (char*)"c:\\data\\output.txt" };
+	NetworkSampleEstimates(tsteps_value, paad0_value, naad0_value, paadtrace_value,
+		aadreseeddesign_value, paadrandom_value, naadtarget_value, coupons_value,
+		tempOutput, nodeinputfilepath, nodefiinputfilepath, edgeinputfilepath);
+
+	FILE *tempOutPut = fopen(*tempOutput, "rb");
+
+	if (tempOutPut)
+	{
+		fseek(tempOutPut, 0, SEEK_END);
+		length = ftell(tempOutPut);
+		fseek(tempOutPut, 0, SEEK_SET);
+		buffer = malloc(length);
+		if (buffer)
+		{
+			fread(buffer, 1, length, tempOutPut);
+		}
+		fclose(tempOutPut);
+	}
+	*outputbuffer = (char*) buffer;
+	return 0;
+}
+								
 /*
 tsteps default 10000
 paad0 default 0.0167
@@ -44,7 +77,7 @@ paadrandom default 0.01
 naadtarget default 400
 coupons default 0
 */
-int scratch20(int *tsteps_value, double *paad0_value, int *naad0_value, double *paadtrace_value,
+int NetworkSampleEstimates(int *tsteps_value, double *paad0_value, int *naad0_value, double *paadtrace_value,
 			  int *aadreseeddesign_value, double *paadrandom_value, int *naadtarget_value, int *coupons_value,
 			  char **outputfilepath, char **nodeinputfilepath, char **nodefiinputfilepath, char **edgeinputfilepath)
 {
@@ -58,7 +91,6 @@ int scratch20(int *tsteps_value, double *paad0_value, int *naad0_value, double *
   clock_t clock0, clock1;
   time0 = time(NULL);
   clock0 = clock();
-
   int tsteps = *tsteps_value;  /* number of iterations of sampling process */
   
   /* select about paad0 * n initial units for the fast sampling process */
@@ -70,19 +102,15 @@ int scratch20(int *tsteps_value, double *paad0_value, int *naad0_value, double *
   int naadtarget = *naadtarget_value;// 400;
   int coupons = *coupons_value;// 0;
 
-  /* write output to a file, outputfile = 1, or terminal, outputfile = 0. */
-  int outputfile = 1;
-
   FILE *out_stream=NULL;
   if (outputfile == 1) /* change standard output to a file */
-    {
-      if((out_stream=freopen(*outputfilepath /*"c:\\data\\output.txt"*/, "w" ,stdout))==NULL)
-	{
-	  printf("Cannot open file: %s\n", *outputfilepath);
-	  exit(1);
-	}
-    }
-
+  {
+	  if ((out_stream = freopen(*outputfilepath /*"c:\\data\\output.txt"*/, "w", stdout)) == NULL)
+	  {
+		  printf("Cannot open file: %s\n", *outputfilepath);
+		  exit(1);
+	  }
+  }
 
   printf("\n");
   printf("********************************************************\n");
@@ -1010,8 +1038,6 @@ printf("\n");
     {
       fclose(out_stream);
     }
-
-
 
    return 0;
 } /* end of main */
