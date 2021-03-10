@@ -152,6 +152,7 @@ int NetworkSampleEstimates(int *tsteps_value, double *paad0_value, int *naad0_va
   /* char *namearray[100]; */
   char namearray[100][20];
   char *token;
+  int nameColumns = 0;
 
   /* get first variable name */
   i=0;
@@ -164,12 +165,12 @@ int NetworkSampleEstimates(int *tsteps_value, double *paad0_value, int *naad0_va
       token = strtok(NULL," "); /* increments i before calculation */
     }
 
-  ncolumns = i;
+  nameColumns = i;
   int ndatavar;
-  ndatavar = ncolumns - 1;
+  ndatavar = nameColumns - 1;
 
-  printf("Node data %d columns with names:\n", ncolumns);
-	  for(i=0;i<ncolumns;i++)
+  printf("Node data %d columns with names:\n", nameColumns);
+	  for(i=0;i< nameColumns;i++)
     {
       printf(" %s", namearray[i]);
     }
@@ -798,7 +799,12 @@ for (t = 1; t <= tsteps; t++)
 
 
  /* write file headings */
- fprintf(nodesfi_stream, "id bug degree concurrent fi\n");
+ //fprintf(nodesfi_stream, "id bug degree concurrent fi\n");
+ for (i = 0; i < nameColumns; i++)
+ {
+	 fprintf(nodesfi_stream, "%s ", namearray[i]);
+ }
+ fprintf(nodesfi_stream, "\n");
  /* fprintf(edgesfij_stream, "id1 id2 edgedegree fij\n"); */
 
  /* write node and edge data including the fi and fij to files */
@@ -1038,6 +1044,9 @@ printf("\n");
     {
       fclose(out_stream);
     }
+  fclose(nodesfi_stream);
+  fclose(layoutp);
+  fclose(linksp);
 
    return 0;
 } /* end of main */
