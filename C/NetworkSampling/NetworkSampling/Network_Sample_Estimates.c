@@ -802,7 +802,7 @@ for (t = 1; t <= tsteps; t++)
  //fprintf(nodesfi_stream, "id bug degree concurrent fi\n");
  for (i = 0; i < nameColumns; i++)
  {
-	 fprintf(nodesfi_stream, "%s ", namearray[i]);
+	 fprintf(nodesfi_stream, "%s fi", namearray[i]);
  }
  fprintf(nodesfi_stream, "\n");
  /* fprintf(edgesfij_stream, "id1 id2 edgedegree fij\n"); */
