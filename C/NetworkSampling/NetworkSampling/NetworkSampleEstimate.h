@@ -10,10 +10,10 @@
 
 extern __declspec(dllexport) int __cdecl NetworkSampleEstimates(int *tsteps_value, double *paad0_value, int *naad0_value, double *paadtrace_value,
 												   int *aadreseeddesign_value, double *paadrandom_value, int *naadtarget_value, int *coupons_value,
-												   char **outputfilepath, char **nodeinputfilepath, char **nodefiinputfilepath, char **edgeinputfilepath);
+												   char **outputfilepath, char **nodeinputfilepath, char **nodefioutputputfilepath, char **edgeinputfilepath);
 
 extern __declspec(dllexport) int __cdecl NetworkSampleEstimatesConsoleOutput(int *tsteps_value, double *paad0_value, int *naad0_value, double *paadtrace_value,
 													int *aadreseeddesign_value, double *paadrandom_value, int *naadtarget_value, int *coupons_value,
-													char **nodeinputfilepath, char **nodefiinputfilepath, char **edgeinputfilepath, char **outputbuffer);
+													char **outputfilepath, char **nodeinputfilepath, char **nodefioutputputfilepath, char **edgeinputfilepath, char **outputbuffer);
 
 													

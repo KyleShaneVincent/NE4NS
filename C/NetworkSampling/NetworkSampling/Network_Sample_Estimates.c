@@ -42,14 +42,13 @@ long length;
 
 int NetworkSampleEstimatesConsoleOutput(int *tsteps_value, double *paad0_value, int *naad0_value, double *paadtrace_value,
 	int *aadreseeddesign_value, double *paadrandom_value, int *naadtarget_value, int *coupons_value,
-	char **nodeinputfilepath, char **nodefiinputfilepath, char **edgeinputfilepath, char **outputbuffer)
+	char **outputfilepath, char **nodeinputfilepath, char **nodefioutputputfilepath, char **edgeinputfilepath, char **outputbuffer)
 {
-	char *tempOutput[] = { (char*)"c:\\data\\output.txt" };
 	NetworkSampleEstimates(tsteps_value, paad0_value, naad0_value, paadtrace_value,
 		aadreseeddesign_value, paadrandom_value, naadtarget_value, coupons_value,
-		tempOutput, nodeinputfilepath, nodefiinputfilepath, edgeinputfilepath);
+		outputfilepath, nodeinputfilepath, nodefioutputputfilepath, edgeinputfilepath);
 
-	FILE *tempOutPut = fopen(*tempOutput, "rb");
+	FILE *tempOutPut = fopen(*outputfilepath, "rb");
 
 	if (tempOutPut)
 	{
@@ -79,7 +78,7 @@ coupons default 0
 */
 int NetworkSampleEstimates(int *tsteps_value, double *paad0_value, int *naad0_value, double *paadtrace_value,
 			  int *aadreseeddesign_value, double *paadrandom_value, int *naadtarget_value, int *coupons_value,
-			  char **outputfilepath, char **nodeinputfilepath, char **nodefiinputfilepath, char **edgeinputfilepath)
+			  char **outputfilepath, char **nodeinputfilepath, char **nodefioutputputfilepath, char **edgeinputfilepath)
 {
   extern NODE first;
   /* int dataid, databug, datadegree, dataconcurrent; */
@@ -784,10 +783,10 @@ for (t = 1; t <= tsteps; t++)
  /* char edges_filename[] = "edgesfij.txt"; */
 
  /* open the files to write to */
- nodesfi_stream = fopen(*nodefiinputfilepath, "w");
+ nodesfi_stream = fopen(*nodefioutputputfilepath, "w");
  if (nodesfi_stream == NULL)
    {
-     printf("can't file %s\n", *nodefiinputfilepath);
+     printf("can't file %s\n", *nodefioutputputfilepath);
      exit(1);
    }
  /* edges_stream = fopen(edgesfij_filename, "w"); */
