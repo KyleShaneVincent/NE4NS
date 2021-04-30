@@ -81,6 +81,7 @@ int NetworkSampleEstimates(int *tsteps_value, double *paad0_value, int *naad0_va
 			  char **outputfilepath, char **nodeinputfilepath, char **nodefioutputputfilepath, char **edgeinputfilepath)
 {
   extern NODE first;
+  first = NULL;
   /* int dataid, databug, datadegree, dataconcurrent; */
   int i, count, count2;
   FILE *layoutp;
