@@ -1,0 +1,9 @@
+Package: NE4NS
+Type: Package
+Title: Network Sampling
+Version: 1.0
+Author: Kyle
+Maintainer: Kyle Kyle <Kyle@kyle.com>
+Description: Network Sampling
+License: GPL-2
+LazyData: FALSE

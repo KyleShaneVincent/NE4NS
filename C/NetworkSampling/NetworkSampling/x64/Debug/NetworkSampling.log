@@ -1,0 +1,22 @@
+﻿  stdafx.cpp
+  dllmain.cpp
+  NetworkSampling.cpp
+  Generating Code...
+  libscratch.c
+c:\users\seraphimspawn\source\repos\ne4ns\ne4ns\c\networksampling\networksampling\libscratch.c(432): warning C4013: 'open' undefined; assuming extern returning int
+c:\users\seraphimspawn\source\repos\ne4ns\ne4ns\c\networksampling\networksampling\libscratch.c(435): warning C4013: 'read' undefined; assuming extern returning int
+c:\users\seraphimspawn\source\repos\ne4ns\ne4ns\c\networksampling\networksampling\libscratch.c(437): warning C4013: 'close' undefined; assuming extern returning int
+c:\users\seraphimspawn\source\repos\ne4ns\ne4ns\c\networksampling\networksampling\libscratch.c(454): warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+  Network_Sample_Estimates.c
+c:\users\seraphimspawn\source\repos\ne4ns\ne4ns\c\networksampling\networksampling\network_sample_estimates.c(61): warning C4090: 'function': different 'const' qualifiers
+c:\users\seraphimspawn\source\repos\ne4ns\ne4ns\c\networksampling\networksampling\network_sample_estimates.c(235): warning C4477: 'printf' : format string '%ld' requires an argument of type 'long', but variadic argument 2 has type 'size_t'
+  c:\users\seraphimspawn\source\repos\ne4ns\ne4ns\c\networksampling\networksampling\network_sample_estimates.c(235): note: consider using '%zd' in the format string
+c:\users\seraphimspawn\source\repos\ne4ns\ne4ns\c\networksampling\networksampling\network_sample_estimates.c(374): warning C4244: '=': conversion from 'time_t' to 'unsigned long', possible loss of data
+c:\users\seraphimspawn\source\repos\ne4ns\ne4ns\c\networksampling\networksampling\network_sample_estimates.c(448): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+c:\users\seraphimspawn\source\repos\ne4ns\ne4ns\c\networksampling\networksampling\network_sample_estimates.c(758): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+  Generating Code...
+     Creating library C:\Users\SeraphimSpawn\source\repos\NE4NS\NE4NS\C\NetworkSampling\x64\Debug\NetworkSampling.lib and object C:\Users\SeraphimSpawn\source\repos\NE4NS\NE4NS\C\NetworkSampling\x64\Debug\NetworkSampling.exp
+  NetworkSampling.vcxproj -> C:\Users\SeraphimSpawn\source\repos\NE4NS\NE4NS\C\NetworkSampling\x64\Debug\NetworkSampling.dll
+          1 file(s) copied.
+          1 file(s) copied.
+          1 file(s) copied.
